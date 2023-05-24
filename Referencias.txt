@@ -1,0 +1,10 @@
+hospedagem do SQL: https://www.freemysqlhosting.net/account/
+
+acesso ao SQL: {
+    Server: sql10.freemysqlhosting.net
+    Name: sql10620591
+    Username: sql10620591
+    Password: RMYARyIbe6
+    Port number: 3306
+}
+
