@@ -13,36 +13,62 @@
   <body>
 
     <div class="container mt-5 row" style="margin-left: auto;margin-right: auto;">
-        <div class="col mainFunctions">
+        
+        <div class="col mainFunctions" onclick="showSelected('cadastraProduto')">
             <div class="border rounded border-solid p-2">
                 <label>Cadastro Produtos</label>
             </div>
         </div>
-        <div class="col mainFunctions">
+        <div class="col mainFunctions" onclick="showSelected('cadastraCliente')">
             <div class="border rounded border-solid p-2">
                 <label>Cadastro Cliente</label>
             </div>
         </div>
-        <div class="col mainFunctions">
+        <div class="col mainFunctions"  onclick="showSelected('venda')">
             <div class="border rounded border-solid p-2">
                 <label>Venda</label>
             </div>
         </div>
 
         <div id="content" class="container col-12 mt-3">
-            <div id="cadastraProduto">
+
+            <div id="cadastraProduto" class="areaDeTrabalho">
                 <div class="border rounded border-solid p-2">
                     <label>Cadastro Produtos</label>
+                    <div>
+                        <label for="number">Código de barra:</label>
+                        <input type="number" class="form-control" id="codBarra">
+                    </div>
+                    <div>
+                        <label for="text">Nome do Produto:</label>
+                        <input type="text" class="form-control" id="nomeProduto">
+                    </div>
+                    <div>
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div>
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div>
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
+                    <div>
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="email">
+                    </div>
                 </div>
             </div>
     
-            <div id="cadastraCliente">
+            <div id="cadastraCliente" class="areaDeTrabalho">
                 <div class="border rounded border-solid p-2">
                     <label>Cadastro Cliente</label>
                 </div>
             </div>
     
-            <div id="venda">
+            <div id="venda" class="areaDeTrabalho">
                 <div class="border rounded border-solid p-2">
                     <label>Venda</label>
                 </div>
