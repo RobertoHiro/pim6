@@ -46,6 +46,7 @@ function salvarCliente(){
         Endereco : document.querySelector('#clienteEndereco').value,
         Telefone : document.querySelector('#clienteTelefone').value,
         Email : document.querySelector('#clienteEmail').value,
+        DataCadastro: Date.now(),
     }
     console.log(novoCliente);
     firebaseSave("cliente/"+novoCliente.Nome+"_"+novoCliente.Cod, novoCliente);
@@ -58,6 +59,7 @@ function salvarVenda(){
         SelectPayment : document.querySelector('#vendaSelectPayment').value,
         PaymentStatus : document.querySelector('#vendaPaymentStatus').value,
         BuyStatus : document.querySelector('#vendaBuyStatus').value,
+        DataVenda: Date.now(),
     }
     console.log(novaVenda);
     firebaseSave("venda/"+ novaVenda.Cod, novaVenda);
