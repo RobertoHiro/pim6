@@ -1,4 +1,9 @@
+
+let listToShow = [];
+
 function listarProdutos(){
+
+    listToShow = [];
     let listAcessorios=[];
     let listGeek=[];
     let listJogos=[];
@@ -7,11 +12,66 @@ function listarProdutos(){
     listGeek = firebaseList('produtos/geek');
     listJogos = firebaseList('produtos/jogos');
 
-
 }
 
-function createListItens(){
+function filtrarLista(event){
+    event.preventDefault();
+    let arrayFiltered = [];
+    let filterValue = document.querySelector('#filterBar').value.trim();
+    console.log("filter", filterValue);
+    listToShow.filter((e)=>{
+        if(e['nomeProduto'].includes(filterValue) 
+        || e['codBarra'].includes(filterValue)
+        || e['categoria'].includes(filterValue)
+        || e['fabricante'].includes(filterValue)
+        || e['fabricante'].includes(filterValue)
+        ){
+            arrayFiltered.push(e);
+        }
+    });
     
+    createProductListItens(arrayFiltered);
+}
+
+function createProductListItens(arrayList){
+    let divListProduto = document.querySelector('#listItensOfProductis');
+    divListProduto.innerHTML = "";
+    arrayList.forEach(item=>{
+        const htmlListItem = `                
+        <div class="row align-items-center border rounded border-solid p-2 m-0">
+            <div class="col-12 col-md-4">
+            <h4 class="pt-3 text-170 text-600 text-primary-d1 letter-spacing">
+                `+item['nomeProduto']+`
+            </h4>
+    
+            <div class="text-secondary-d1 text-120">
+                Categoria: `+item['categoria']+`
+            </div>
+            </div>
+    
+            <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                <li>
+                    Fabricante: `+item['fabricante']+`
+                </li>
+    
+                <li class="mt-25">
+                    Código de Barra: `+item['codBarra']+`
+                </li>
+            </ul>
+    
+            <ul class="list-unstyled mb-0 col-12 col-md-4 text-dark-l1 text-90 text-left my-4 my-md-0">
+                <li>
+                    Valor: `+item['valor']+`
+                </li>
+    
+                <li class="mt-25">
+                    Quantidade: `+item['quantidade']+`
+                </li>
+            </ul>
+    
+        </div>`;
+        divListProduto.innerHTML+=htmlListItem;
+    });
 }
 
 function hideAll(){
@@ -41,7 +101,7 @@ function salvarProdutos(){
         valor : document.querySelector('#valor').value,
     }
     console.log(novoProduto);
-    firebaseSave("produtos/"+ novoProduto.categoria, novoProduto);
+    firebaseSave("produtos/"+ novoProduto.categoria+"/"+novoProduto.nomeProduto, novoProduto);
 }
 
 function salvarCliente(){
@@ -77,10 +137,11 @@ function firebaseSave(ref, objToSave){
 }
 
 function firebaseList(ref){
-    let toReturn = [];
-    firebase.database().ref(ref).once('value',(snap)=>{
+    firebase.database().ref(ref).once('value',(snapshot)=>{
         snapshot.forEach(function(childSnapshot) {
-            toReturn.push(childSnapshot);
+            listToShow.push(childSnapshot.val());
         });
+        console.log(listToShow);
+        createProductListItens(listToShow);
     });
 }
