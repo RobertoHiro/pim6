@@ -48,9 +48,9 @@
                             <label for="text">Categoria:</label>
                             <select class="form-select" aria-label="Default select example" id="categoria">
                                 <option selected>Selecione a categoria</option>
-                                <option value="1">Jogos</option>
-                                <option value="2">Acessórios</option>
-                                <option value="3">Produtos Geek</option>
+                                <option value="jogos">Jogos</option>
+                                <option value="acessorio">Acessórios</option>
+                                <option value="geek">Produtos Geek</option>
                               </select>
                         </div>
                         <div class="form-group">
@@ -118,8 +118,40 @@
                     <label>Venda</label>
                     
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" required="true" id="clienteEmail">
+                        <label for="number">Codigo:</label>
+                        <input type="number" class="form-control" required="true" id="vendaCod">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="number">Valor:</label>
+                        <input type="number" class="form-control" required="true" id="vendaValor">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="text">Opção de pagamento:</label>
+                        <select class="form-select" aria-label="Default select example" id="vendaSelectPayment">
+                            <option selected>Selecione a opção</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Cartão">Cartão</option>
+                          </select>                    
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="text">Status do pagamento:</label>
+                        <select class="form-select" aria-label="Default select example" id="vendaPaymentStatus">
+                            <option selected>Selecione a opção</option>
+                            <option value="Pago">Pago</option>
+                            <option value="Pendente">Pendente</option>
+                        </select>                      
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="text">Status da venda:</label>
+                        <select class="form-select" aria-label="Default select example" id="vendaBuyStatus">
+                            <option selected>Selecione a opção</option>
+                            <option value="Concluido">Concluido</option>
+                            <option value="Pendente">Pendente</option>
+                        </select>                      
                     </div>
                     
                     <button class="btn btn-primary" onclick="salvarCliente()">Salvar cliente</button>

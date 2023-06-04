@@ -28,7 +28,7 @@ function salvarProdutos(){
     let novoProduto = {
         codBarra : document.querySelector('#codBarra').value,
         nomeProduto : document.querySelector('#nomeProduto').value,
-        categoria : setProdutoCategoria(document.querySelector('#categoria').value),
+        categoria : document.querySelector('#categoria').value,
         fabricante : document.querySelector('#fabricante').value,
         quantidade : document.querySelector('#quantidade').value,
         valor : document.querySelector('#valor').value,
@@ -52,30 +52,15 @@ function salvarCliente(){
 }
 
 function salvarVenda(){
-    let novoProduto = {
-        codBarra : document.querySelector('#codBarra').value,
-        nomeProduto : document.querySelector('#nomeProduto').value,
-        categoria : setProdutoCategoria(document.querySelector('#categoria').value),
-        fabricante : document.querySelector('#fabricante').value,
-        quantidade : document.querySelector('#quantidade').value,
-        valor : document.querySelector('#valor').value,
+    let novaVenda = {
+        Cod : document.querySelector('#vendaCod').value,
+        Valor : document.querySelector('#vendaValor').value,
+        SelectPayment : document.querySelector('#vendaSelectPayment').value,
+        PaymentStatus : document.querySelector('#vendaPaymentStatus').value,
+        BuyStatus : document.querySelector('#vendaBuyStatus').value,
     }
-    console.log(novoProduto);
-    firebaseSave("produtos", novoProduto.categoria, novoProduto);
-}
-
-function setProdutoCategoria(indexSelected){
-    let toReturn = null;
-    if (indexSelected == 1) 
-        toReturn = "jogos";
-
-    else if (indexSelected == 2)
-        toReturn = "acessorio";
-
-    else if (indexSelected == 3)
-        toReturn = "geek";
-
-    return toReturn;
+    console.log(novaVenda);
+    firebaseSave("venda/"+ novaVenda.Cod, novaVenda);
 }
 
 function firebaseSave(ref, objToSave){
