@@ -1,9 +1,18 @@
-let login;
+function listarProdutos(){
+    let listAcessorios=[];
+    let listGeek=[];
+    let listJogos=[];
 
-firebase.database().ref('login').once('value',(snap)=>{
-  login = snap.val();
-  console.log(login);
-});
+    listAcessorios = firebaseList('produtos/acessorio');
+    listGeek = firebaseList('produtos/geek');
+    listJogos = firebaseList('produtos/jogos');
+
+
+}
+
+function createListItens(){
+    
+}
 
 function hideAll(){
     document.querySelectorAll('#content .areaDeTrabalho').forEach(element => {
@@ -11,8 +20,6 @@ function hideAll(){
         element.classList.add('visually-hidden');
     });
 }
-
-hideAll();
 
 function showSelected(target){
     hideAll();
@@ -67,4 +74,13 @@ function salvarVenda(){
 
 function firebaseSave(ref, objToSave){
     firebase.database().ref(ref).set(objToSave);
+}
+
+function firebaseList(ref){
+    let toReturn = [];
+    firebase.database().ref(ref).once('value',(snap)=>{
+        snapshot.forEach(function(childSnapshot) {
+            toReturn.push(childSnapshot);
+        });
+    });
 }

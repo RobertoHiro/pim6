@@ -17,10 +17,11 @@ firebase.database().ref('login').once('value', (snap) => {
   console.log(login);
 });
 
-function doLogin() {
+function doLogin(event) {
+  event.preventDefault();
   var username = document.querySelector('#email').value;
   var usernameSplited = username.split('@');
-  var pass = document.querySelector('#pwd').value;
+  var pass = document.querySelector('#password').value;
   var register = login[usernameSplited[0]];
   if (register && register['host'] == [usernameSplited[1]] && register['pass'] == pass) {
     console.log('user exist');
