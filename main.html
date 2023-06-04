@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-  </head>
-  <body>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/main.css">
+
+</head>
+
+<body>
 
     <div class="d-flex flex-row-reverse">
         <button class="button button-default float-end col-1" onclick="Sair()">Sair</button>
@@ -13,7 +18,7 @@
 
     <!-- área de selesão -->
     <div class="container mt-5 row" style="margin-left: auto;margin-right: auto;">
-        
+
         <div class="col mainFunctions" onclick="showSelected('cadastraProduto')">
             <div class="border rounded border-solid p-2">
                 <label>Cadastro Produtos</label>
@@ -24,7 +29,7 @@
                 <label>Cadastro Cliente</label>
             </div>
         </div>
-        <div class="col mainFunctions"  onclick="showSelected('venda')">
+        <div class="col mainFunctions" onclick="showSelected('venda')">
             <div class="border rounded border-solid p-2">
                 <label>Venda</label>
             </div>
@@ -32,128 +37,130 @@
 
         <!-- Área de cadastro -->
         <div id="content" class="container col-12 mt-3">
-<!-- <form> -->
+            <!-- <form> -->
             <div id="cadastraProduto" class="areaDeTrabalho visually-hidden">
                 <div class="border rounded border-solid p-2">
                     <h2>Cadastro Produtos</h2>
-                        <div class="form-group">
-                            <label for="number">Código de barra:</label>
-                            <input type="number" class="form-control" required="true" id="codBarra">
-                        </div>
-                        <div class="form-group">
-                            <label for="text">Nome do Produto:</label>
-                            <input type="text" class="form-control" required="true" id="nomeProduto">
-                        </div>
-                        <div class="form-group">
-                            <label for="text">Categoria:</label>
-                            <select class="form-select" aria-label="Default select example" id="categoria">
-                                <option selected>Selecione a categoria</option>
-                                <option value="jogos">Jogos</option>
-                                <option value="acessorio">Acessórios</option>
-                                <option value="geek">Produtos Geek</option>
-                              </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="text">Fabricante:</label>
-                            <input type="text" class="form-control" required="true" id="fabricante">
-                        </div>
-                        <div class="form-group">
-                            <label for="number">Quantidade
-                                :</label>
-                            <input type="number" class="form-control" required="true" id="quantidade">
-                        </div>
-                        <div class="form-group">
-                            <label for="number">Valor:</label>
-                            <input type="number" class="form-control" required="true" id="valor">
-                        </div>
-                        <button class="btn btn-primary" onclick="salvarProdutos()">Salvar produto</button>
+                    <div class="form-group">
+                        <label for="number">Código de barra:</label>
+                        <input type="number" class="form-control" required="true" id="codBarra">
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Nome do Produto:</label>
+                        <input type="text" class="form-control" required="true" id="nomeProduto">
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Categoria:</label>
+                        <select class="form-select" aria-label="Default select example" id="categoria">
+                            <option selected>Selecione a categoria</option>
+                            <option value="jogos">Jogos</option>
+                            <option value="acessorio">Acessórios</option>
+                            <option value="geek">Produtos Geek</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="text">Fabricante:</label>
+                        <input type="text" class="form-control" required="true" id="fabricante">
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Quantidade
+                            :</label>
+                        <input type="number" class="form-control" required="true" id="quantidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Valor:</label>
+                        <input type="number" class="form-control" required="true" id="valor">
+                    </div>
+                    <button class="btn btn-primary" onclick="salvarProdutos()">Salvar produto</button>
                 </div>
             </div>
-        <!-- </form> -->
+            <!-- </form> -->
             <div id="cadastraCliente" class="areaDeTrabalho visually-hidden">
                 <div class="border rounded border-solid p-2">
                     <label>Cadastro Cliente</label>
-                    
+
                     <div class="form-group">
                         <label for="number">Código:</label>
                         <input type="number" class="form-control" required="true" id="clienteCod">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="number">RG:</label>
-                        <input type="number" class="form-control" required="true" id="clienteRG" data-inputmask-mask="99.999.999-9">
+                        <input type="number" class="form-control" required="true" id="clienteRG"
+                            data-inputmask-mask="99.999.999-9">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="number">CPF:</label>
-                        <input type="number" class="form-control" required="true" id="clienteCPF" data-inputmask-mask="999.999.999-99">
+                        <input type="number" class="form-control" required="true" id="clienteCPF"
+                            data-inputmask-mask="999.999.999-99">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="text">Nome:</label>
                         <input type="text" class="form-control" required="true" id="clienteNome">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="text">Endereço:</label>
                         <input type="text" class="form-control" required="true" id="clienteEndereco">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="number">Telefone:</label>
                         <input type="number" class="form-control" required="true" id="clienteTelefone">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="email">Email:</label>
                         <input type="email" class="form-control" required="true" id="clienteEmail">
                     </div>
-                    
+
                     <button class="btn btn-primary" onclick="salvarCliente()">Salvar cliente</button>
                 </div>
             </div>
-    
+
             <div id="venda" class="areaDeTrabalho visually-hidden">
                 <div class="border rounded border-solid p-2">
                     <label>Venda</label>
-                    
+
                     <div class="form-group">
                         <label for="number">Codigo:</label>
                         <input type="number" class="form-control" required="true" id="vendaCod">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="number">Valor:</label>
                         <input type="number" class="form-control" required="true" id="vendaValor">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="text">Opção de pagamento:</label>
                         <select class="form-select" aria-label="Default select example" id="vendaSelectPayment">
                             <option selected>Selecione a opção</option>
                             <option value="Dinheiro">Dinheiro</option>
                             <option value="Cartão">Cartão</option>
-                          </select>                    
+                        </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="text">Status do pagamento:</label>
                         <select class="form-select" aria-label="Default select example" id="vendaPaymentStatus">
                             <option selected>Selecione a opção</option>
                             <option value="Pago">Pago</option>
                             <option value="Pendente">Pendente</option>
-                        </select>                      
+                        </select>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="text">Status da venda:</label>
                         <select class="form-select" aria-label="Default select example" id="vendaBuyStatus">
                             <option selected>Selecione a opção</option>
                             <option value="Concluido">Concluido</option>
                             <option value="Pendente">Pendente</option>
-                        </select>                      
+                        </select>
                     </div>
-                    
+
                     <button class="btn btn-primary" onclick="salvarCliente()">Salvar cliente</button>
                 </div>
             </div>
@@ -161,15 +168,23 @@
 
     </div>
 
-  </body>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+<script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
-    <script defer src="js/firebase.js"></script>
-    <script defer src="js/main.js"></script>
+<script defer src="js/firebase.js"></script>
+<script defer src="js/main.js"></script>
 
 </html>
