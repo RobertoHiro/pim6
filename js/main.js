@@ -1,16 +1,19 @@
 
 let listToShow = [];
+let vendaLength = 0;
+let vendaList = [];
+let listProductsInListaVenda = [];
 
-function listarProdutos(){
+function listarProdutos(needToCreateHtml){
 
     listToShow = [];
     let listAcessorios=[];
     let listGeek=[];
     let listJogos=[];
 
-    listAcessorios = firebaseList('produtos/acessorio');
-    listGeek = firebaseList('produtos/geek');
-    listJogos = firebaseList('produtos/jogos');
+    listAcessorios = firebaseListProdutos('produtos/acessorio', needToCreateHtml);
+    listGeek = firebaseListProdutos('produtos/geek', needToCreateHtml);
+    listJogos = firebaseListProdutos('produtos/jogos', needToCreateHtml);
 
 }
 
@@ -121,12 +124,13 @@ function salvarCliente(){
 
 function salvarVenda(){
     let novaVenda = {
-        Cod : document.querySelector('#vendaCod').value,
-        Valor : document.querySelector('#vendaValor').value,
+        Cod : vendaLength,
+        Valor : parseFloat(document.querySelector('#vendaValorTotal').innerHTML),
         SelectPayment : document.querySelector('#vendaSelectPayment').value,
         PaymentStatus : document.querySelector('#vendaPaymentStatus').value,
         BuyStatus : document.querySelector('#vendaBuyStatus').value,
         DataVenda: Date.now(),
+        ListProdutos: listProductsInListaVenda
     }
     console.log(novaVenda);
     firebaseSave("venda/"+ novaVenda.Cod, novaVenda);
@@ -136,12 +140,118 @@ function firebaseSave(ref, objToSave){
     firebase.database().ref(ref).set(objToSave);
 }
 
-function firebaseList(ref){
+function firebaseListProdutos(ref, needToCreateHtml){
     firebase.database().ref(ref).once('value',(snapshot)=>{
         snapshot.forEach(function(childSnapshot) {
             listToShow.push(childSnapshot.val());
         });
-        console.log(listToShow);
-        createProductListItens(listToShow);
+        if(needToCreateHtml)
+            createProductListItens(listToShow);
     });
 }
+
+function firebaseListVendas(){
+    listarProdutos(false);
+    firebase.database().ref('venda').once('value',(snapshot)=>{
+        // vendaLength = snapshot.length;
+        snapshot.forEach(function(childSnapshot) {
+            vendaLength++;
+            vendaList.push(childSnapshot.val());
+        });
+        console.log(vendaList);
+    });
+}
+
+function clearVendaListItens(){
+    var htmlToClear = document.querySelector('#listaDeProdutosNaVenda');
+    htmlToClear.innerHTML = "";
+    listProductsInListaVenda = []
+}
+
+function addItemProdutctOnVenda(){
+    var codigo = document.querySelector("#valueCod").value;
+    var nomeProduto = document.querySelector("#valueNome").value;
+    var quantidade = document.querySelector("#valueQunatidade").value;
+    console.log('listToShow',listToShow);
+    for(let i = 0; i < listToShow.length; i++){
+        if(listToShow[i]['codBarra'] == codigo || listToShow[i]['nomeProduto'] == nomeProduto){
+            let item = {
+                categoria:listToShow[i]['categoria'],
+                codBarra:listToShow[i]['codBarra'],
+                fabricante:listToShow[i]['fabricante'],
+                nomeProduto:listToShow[i]['nomeProduto'],
+                quantidade:quantidade,
+                valor:listToShow[i]['valor']
+            }
+            listProductsInListaVenda.push(item);
+            console.log(listProductsInListaVenda);
+            addHtmlItemProdutctOnVenda(item, quantidade);
+            break;
+        }
+    }
+}
+
+function addHtmlItemProdutctOnVenda(item, quantidade){
+    var htmlToPopulate = document.querySelector('#listaDeProdutosNaVenda');
+    var htmlItemProductOnVenda = `
+    <div class="row">
+        <div class="col-3">
+            <label>`+item['nomeProduto']+`</label>
+        </div>
+        <div class="col-3">
+            <label>`+item['valor']+`</label>
+        </div>
+        <div class="col-2">
+            <label>`+quantidade+`</label>
+        </div>
+        <div class="col-3">
+            <label class="valorTotalItem">`+(item['valor'] * quantidade)+`</label>
+        </div>
+        <div class="col-1">
+            <buttom class="col-1 rounded border border-solid" 
+            onclick="deleteThisProduct(`+(listProductsInListaVenda.length-1)+`)">
+            -</buttom>
+        </div>
+
+    </div>
+        `;
+
+    htmlToPopulate.innerHTML+=htmlItemProductOnVenda;
+
+    var vendaValorTotal = document.querySelector('#vendaValorTotal');
+    let valorTotalCalculado = 0.0;
+    var allValorTotalItem = document.querySelectorAll('.valorTotalItem');
+    allValorTotalItem.forEach(valorParaSomar => {
+        // console.log(valorParaSomar.innerHTML);
+        valorTotalCalculado += parseFloat(valorParaSomar.innerHTML);
+    })
+    // console.log(valorTotalCalculado);
+    vendaValorTotal.innerHTML = valorTotalCalculado;
+}
+
+function deleteThisProduct(index){
+    // listProductsInListaVenda.splice(index,-1);
+    // delete listProductsInListaVenda[index];
+    let copyArray = listProductsInListaVenda;
+    listProductsInListaVenda=[];
+    for (let i = 0; i < copyArray.length; i++){
+        if(i != index){
+            listProductsInListaVenda.push(copyArray[i]);
+            addHtmlItemProdutctOnVenda(copyArray[i], copyArray[i]['quantidade']);
+        }
+    }
+    // listProductsInListaVenda = copyArray;
+
+    console.log(listProductsInListaVenda);
+
+    var htmlToClear = document.querySelector('#listaDeProdutosNaVenda');
+    htmlToClear.innerHTML = "";
+
+    listProductsInListaVenda.forEach(item => {
+            addHtmlItemProdutctOnVenda(item, item['quantidade']);
+    });
+}
+
+
+
+firebaseListVendas();

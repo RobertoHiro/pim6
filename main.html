@@ -19,7 +19,7 @@
                 <label>Cadastro Produtos</label>
             </div>
         </div>
-        <div class="col mainFunctions" onclick="showSelected('listProduto'); listarProdutos()">
+        <div class="col mainFunctions" onclick="showSelected('listProduto'); listarProdutos(true)">
             <div class="border rounded border-solid p-2">
                 <label>Lista de Produtos</label>
             </div>
@@ -29,7 +29,7 @@
                 <label>Cadastro Cliente</label>
             </div>
         </div>
-        <div class="col mainFunctions"  onclick="showSelected('venda')">
+        <div class="col mainFunctions"  onclick="showSelected('venda'); clearVendaListItens();">
             <div class="border rounded border-solid p-2">
                 <label>Venda</label>
             </div>
@@ -87,61 +87,100 @@
             </div>
         </div>
 
-            <div id="cadastraCliente" class="areaDeTrabalho visually-hidden">
-                <div class="border rounded border-solid p-2">
-                    <label>Cadastro Cliente</label>
-                    
-                    <div class="form-group">
-                        <label for="number">Código:</label>
-                        <input type="number" class="form-control" required="true" id="clienteCod">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="number">RG:</label>
-                        <input type="number" class="form-control" required="true" id="clienteRG" data-inputmask-mask="99.999.999-9">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="number">CPF:</label>
-                        <input type="number" class="form-control" required="true" id="clienteCPF" data-inputmask-mask="999.999.999-99">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="text">Nome:</label>
-                        <input type="text" class="form-control" required="true" id="clienteNome">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="text">Endereço:</label>
-                        <input type="text" class="form-control" required="true" id="clienteEndereco">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="number">Telefone:</label>
-                        <input type="number" class="form-control" required="true" id="clienteTelefone">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" required="true" id="clienteEmail">
-                    </div>
-                    
-                    <button class="btn btn-primary" onclick="salvarCliente()">Salvar cliente</button>
+        <div id="cadastraCliente" class="areaDeTrabalho visually-hidden">
+            <div class="border rounded border-solid p-2">
+                <label>Cadastro Cliente</label>
+                
+                <div class="form-group">
+                    <label for="number">Código:</label>
+                    <input type="number" class="form-control" required="true" id="clienteCod">
                 </div>
+                
+                <div class="form-group">
+                    <label for="number">RG:</label>
+                    <input type="number" class="form-control" required="true" id="clienteRG" data-inputmask-mask="99.999.999-9">
+                </div>
+                
+                <div class="form-group">
+                    <label for="number">CPF:</label>
+                    <input type="number" class="form-control" required="true" id="clienteCPF" data-inputmask-mask="999.999.999-99">
+                </div>
+                
+                <div class="form-group">
+                    <label for="text">Nome:</label>
+                    <input type="text" class="form-control" required="true" id="clienteNome">
+                </div>
+                
+                <div class="form-group">
+                    <label for="text">Endereço:</label>
+                    <input type="text" class="form-control" required="true" id="clienteEndereco">
+                </div>
+                
+                <div class="form-group">
+                    <label for="number">Telefone:</label>
+                    <input type="number" class="form-control" required="true" id="clienteTelefone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" required="true" id="clienteEmail">
+                </div>
+                
+                <button class="btn btn-primary" onclick="salvarCliente()">Salvar cliente</button>
             </div>
-    
+        </div>
+
             <div id="venda" class="areaDeTrabalho visually-hidden">
                 <div class="border rounded border-solid p-2">
                     <label>Venda</label>
                     
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="number">Codigo:</label>
                         <input type="number" class="form-control" required="true" id="vendaCod">
+                    </div> -->
+                    <div class="col-12">
+
+                        <label>Itens na compra</label>
+                        <div class="row mx-0">
+                            <div class="col-4">
+                                <label>Codigo</label>
+                                <input type="number" id="valueCod" class="col-12"></label>
+                            </div>
+                            <div class="col-4">
+                                <label>Nome</label>
+                                <input id="valueNome" class="col-12"></label>
+                            </div>
+                            <div class="col-3">
+                                <label>quantidade</label>
+                                <input type="number" id="valueQunatidade" class="col-12" value="1"></label>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-primary" onclick="addItemProdutctOnVenda()">+</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="row mx-0 rounded border border-solid mt-2">
+                                <div class="col-3">
+                                    <label>Nome</label>
+                                </div>
+                                <div class="col-3">
+                                    <label>valor unitario</label>
+                                </div>
+                                <div class="col-3">
+                                    <label>quantidade</label>
+                                </div>
+                                <div class="col-3">
+                                    <label>valor total</label>
+                                </div>
+                            </div>
+                            <div id="listaDeProdutosNaVenda">
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="number">Valor:</label>
-                        <input type="number" class="form-control" required="true" id="vendaValor">
+                        <label for="number">Valor total da venda:</label>
+                        <label id="vendaValorTotal" type="number" class="form-control" required="true" id="vendaValor" readonly>
                     </div>
                     
                     <div class="form-group">
@@ -171,10 +210,9 @@
                         </select>                      
                     </div>
                     
-                    <button class="btn btn-primary" onclick="salvarVenda()">Salvar cliente</button>
+                    <button class="btn btn-primary" onclick="salvarVenda()">Salvar Venda</button>
                 </div>
             </div>
-        </div>
 
     </div>
 
